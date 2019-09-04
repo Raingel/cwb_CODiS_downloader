@@ -28,23 +28,23 @@ if (isset($_GET['station_id'])){
 		//
 		$temp_file_path='./'.time().rand(0,999999).'.csv';
 		$fp=fopen($temp_file_path,'w');
-		$table_titles=array(0 => 'Æ[´ú®É¶¡(hour)',
-							1 => '´ú¯¸®ğÀ£(hPa)',
-							2 => '®ü¥­­±®ğÀ£(hPa)',
-							3 => '®ğ·Å(¢J)',
-							4 => 'ÅSÂI·Å«×(¢J)',
-							5 => '¬Û¹ï·Ã«×(%)',
-							6 => '­·³t(m/s)',
-							7 => '­·¦V(360degree)',
-							8 => '³Ì¤j°}­·(m/s)',
-							9 => '³Ì¤j°}­·­·¦V(360degree)',
-							10 => '­°¤ô¶q(mm)',
-							11 => '­°¤ô®É¼Æ(hr)',
-							12 => '¤é·Ó®É¼Æ(hr)',
-							13 => '¥ş¤ÑªÅ¤é®g¶q(MJ/¢T)',
-							14 => '¯à¨£«×(km)',	
-							15 => 'µµ¥~½u«ü¼Æ',
-							16 => 'Á`¶³¶q(0~10)');  //Add the table title
+		$table_titles=array(0 => 'è§€æ¸¬æ™‚é–“(hour)',
+							1 => 'æ¸¬ç«™æ°£å£“(hPa)',
+							2 => 'æµ·å¹³é¢æ°£å£“(hPa)',
+							3 => 'æ°£æº«(â„ƒ)',
+							4 => 'éœ²é»æº«åº¦(â„ƒ)',
+							5 => 'ç›¸å°æº¼åº¦(%)',
+							6 => 'é¢¨é€Ÿ(m/s)',
+							7 => 'é¢¨å‘(360degree)',
+							8 => 'æœ€å¤§é™£é¢¨(m/s)',
+							9 => 'æœ€å¤§é™£é¢¨é¢¨å‘(360degree)',
+							10 => 'é™æ°´é‡(mm)',
+							11 => 'é™æ°´æ™‚æ•¸(hr)',
+							12 => 'æ—¥ç…§æ™‚æ•¸(hr)',
+							13 => 'å…¨å¤©ç©ºæ—¥å°„é‡(MJ/ã¡)',
+							14 => 'èƒ½è¦‹åº¦(km)',	
+							15 => 'ç´«å¤–ç·šæŒ‡æ•¸',
+							16 => 'ç¸½é›²é‡(0~10)');  //Add the table title
 		fputcsv($fp,$table_titles);
 		foreach ($data as $date_key => $data_value){  //go through all day
 			//$data_value[0] and $data_value[1] are table titles in Chinese and English respectively, therfore skipped
@@ -62,7 +62,7 @@ if (isset($_GET['station_id'])){
 		unlink($temp_file_path);
 		exit();
 	}else{
-		echo '¤é´Á¦³»~¡A½Ğ­«·s¿é¤J';
+		echo 'æ—¥æœŸæœ‰èª¤ï¼Œè«‹é‡æ–°è¼¸å…¥';
 		
 	}
 }
@@ -72,23 +72,25 @@ if (isset($_GET['station_id'])){
 <html>
   <head>
     <meta equiv="Content-Type" charset="big5">
+	<title>ä¸­å¤®æ°£è±¡å±€æ°£è±¡è§€æ¸¬è³‡æ–™ä¸‹è¼‰å™¨</title>
   </head>
   <body style="      font-family:Microsoft JhengHei;">
-    <div style="text-align: center; border: 1px dashed; width: 60%; margin-left:20%;">¤¤¥¡®ğ¶H§½®ğ¶HÆ[´ú¸ê®Æ¤U¸ü¾¹
-      <form name="form" action="" method="GET"> ¯¸¸¹ (¦p¡G 467490)¡G<input name="station_id" type="text"> <br>
-        °_©l¤é´Á (¦p¡G 20190816)¡G<input name="startdate" type="text"> <br>
-        µ²§ô¤é´Á (¦p¡G 20190913)¡G<input name="enddate" type="text"> <br>
+    <div style="text-align: center; border: 1px dashed; width: 60%; margin-left:20%;">ä¸­å¤®æ°£è±¡å±€æ°£è±¡è§€æ¸¬è³‡æ–™ä¸‹è¼‰å™¨
+      <form name="form" action="" method="GET"> ç«™è™Ÿ (å¦‚ï¼š 467490)ï¼š<input name="station_id" type="text"> <br>
+        èµ·å§‹æ—¥æœŸ (å¦‚ï¼š 20190816)ï¼š<input name="startdate" type="text"> <br>
+        çµæŸæ—¥æœŸ (å¦‚ï¼š 20190913)ï¼š<input name="enddate" type="text"> <br>
         <input value="submit" type="submit"> </form>
     </div>
     <br>
     <ul>
-	  <li>¿é¥XÀÉ®×®æ¦¡¬°CSV</li>
-      <li>¥»¸ê®Æ¬°¤F¤è«K¤@¯ë¨Ï¥ÎªÌ¨Ï¥ÎExcel¶}±Ò¡A¨Ï¥Îbig5½s½X</li>
-      <li>¥»¸ê®Æ¥i¥Hª½±µ¨Ï¥ÎGET¤è¦¡¨ú±o¡G&nbsp;
-        ?station_id=¯¸¸¹&amp;startdate=°_©l¤é´Á&amp;enddate=µ²§ô¤é´Á</li>
-	  <li>¥Ñ©ó®ğ¶HÆ[´ú¸ê®Æ¬d¸ß¨t²Î(CODiS)¬°¨C¤é§ó·s(¤µ¤Ñªº¸ê®Æ©ú¤Ñ¤~·|¦³)¡A¦]¦¹µ²§ô¤é´Á¤£¥i¥H¶W¹L¬Q¤Ñ¡A§_«h·|³Q¦Û°ÊÁY´î</li>
-      <li>¥»¸ê®Æ¨Ó¦Û®ğ¶HÆ[´ú¸ê®Æ¬d¸ß¨t²Î(CODiS) <a href="https://e-service.cwb.gov.tw/HistoryDataQuery/index.jsp">https://e-service.cwb.gov.tw/HistoryDataQuery/index.jsp</a></li>
-      <li>Ãö©ó®ğ¶H¯¸¸¹¤Î¸Ô²Ó¸ê°T¡A½Ğ°Ñ¾\¡G <a href="https://e-service.cwb.gov.tw/wdps/obs/state.htm">https://e-service.cwb.gov.tw/wdps/obs/state.htm</a></li>
-    </ul>
+	  <li>è¼¸å‡ºæª”æ¡ˆæ ¼å¼ç‚ºCSV</li>
+      <li>æœ¬è³‡æ–™ç‚ºäº†æ–¹ä¾¿ä¸€èˆ¬ä½¿ç”¨è€…ä½¿ç”¨Excelé–‹å•Ÿï¼Œä½¿ç”¨big5ç·¨ç¢¼</li>
+      <li>æœ¬è³‡æ–™å¯ä»¥ç›´æ¥ä½¿ç”¨GETæ–¹å¼å–å¾—ï¼š&nbsp;
+        ?station_id=ç«™è™Ÿ&amp;startdate=èµ·å§‹æ—¥æœŸ&amp;enddate=çµæŸæ—¥æœŸ</li>
+	  <li>ç”±æ–¼æ°£è±¡è§€æ¸¬è³‡æ–™æŸ¥è©¢ç³»çµ±(CODiS)ç‚ºæ¯æ—¥æ›´æ–°(ä»Šå¤©çš„è³‡æ–™æ˜å¤©æ‰æœƒæœ‰)ï¼Œå› æ­¤çµæŸæ—¥æœŸä¸å¯ä»¥è¶…éæ˜¨å¤©ï¼Œå¦å‰‡æœƒè¢«è‡ªå‹•ç¸®æ¸›</li>
+      <li>æœ¬è³‡æ–™ä¾†è‡ªæ°£è±¡è§€æ¸¬è³‡æ–™æŸ¥è©¢ç³»çµ±(CODiS) <a href="https://e-service.cwb.gov.tw/HistoryDataQuery/index.jsp">https://e-service.cwb.gov.tw/HistoryDataQuery/index.jsp</a></li>
+      <li>é—œæ–¼æ°£è±¡ç«™è™ŸåŠè©³ç´°è³‡è¨Šï¼Œè«‹åƒé–±ï¼š <a href="https://e-service.cwb.gov.tw/wdps/obs/state.htm">https://e-service.cwb.gov.tw/wdps/obs/state.htm</a></li>
+      <li>æœ¬ç¨‹å¼åŸå§‹ç¢¼è«‹åƒè€ƒï¼šhttps://github.com/Raingel/cwb_CODiS_downloader</li>
+	</ul>
   </body>
 </html>
