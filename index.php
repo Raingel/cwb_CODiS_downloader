@@ -9,6 +9,7 @@ if (isset($_GET['station_id'])){
 		$start_timestamp=strtotime(@$_GET['startdate']);
 		$end_timestamp=strtotime(@$_GET['enddate']);
 		$station_id=$_GET['station_id'];
+		//file_put_contents('log.txt',date('Ymd-His').'-'.$_SERVER['REMOTE_ADDR'].'-'.$station_id.'-'.$_GET['startdate'].'-'.$_GET['enddate']."\n",FILE_APPEND); //log the download event
 		if($end_timestamp>strtotime('yesterday')){
 			$end_timestamp=strtotime('yesterday');  //Since CWB weather data is only available after 1 day. Set the end_timestamp not to exceed yesterday.
 		}
@@ -49,10 +50,12 @@ if (isset($_GET['station_id'])){
 		foreach ($data as $date_key => $data_value){  //go through all day
 			//$data_value[0] and $data_value[1] are table titles in Chinese and English respectively, therfore skipped
 			$i=2;  //data start from the third row
-			while ($i<=25){  //go through every hour in a day
-				$data_value[$i][0]=$date_key.'-'.$data_value[$i][0].'00';
-				fputcsv($fp,$data_value[$i]);
-				$i++;
+			if(count($data_value)>2){ //in case of null observation data, only first two row (Chinese and English titles) will present in table
+				while ($i<=25){  //go through every hour in a day
+					$data_value[$i][0]=$date_key.'-'.$data_value[$i][0].'00';
+					fputcsv($fp,$data_value[$i]);
+					$i++;
+				}
 			}
 		}
 		fclose($fp);
