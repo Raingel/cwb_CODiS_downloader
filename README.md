@@ -11,13 +11,13 @@ php-based weather data downloader from CODiS system of CWB https://e-service.cwb
 實際執行可參考 http://fungi.mycoveryhd.com/CODiS_downloader/
 
 
-#####day_weather_grab_class.php
+##### day_weather_grab_class.php
 包含幾個method
 ###### 一、fetch($station_number,$start_from,$end_to)
 提供站號(可至氣象局查詢 https://e-service.cwb.gov.tw/wdps/obs/state.htm )，開始日期及結束日期(strtotime可辨識即可，如20190816)
 會回傳三層的array資料：
 第一層為日期
-第二層為表格的行(前兩行為表格標題，後面階序該日的小時資料，從一點開始。氣象局的資料中，換日的20190816 00:00是記在前一日，如：20190815 24:00)
+第二層為表格的行(前兩行為表格標題，後面接續該日的小時資料，從一點開始。氣象局的資料中，換日的20190816 00:00是記在前一日，如：20190815 24:00)
 第三層包含一串觀測資料
 
 
