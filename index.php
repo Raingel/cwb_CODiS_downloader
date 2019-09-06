@@ -15,11 +15,14 @@ if (isset($_GET['station_id'])){
 		}
 		while ($start_timestamp<=$end_timestamp){  //loop each day
 			$cached_file_path=$cache_weather_data.'/'.$station_id.'/'.date('Y-m-d',$start_timestamp).'.csv';
-			if (file_exists($cached_file_path) and  filesize($cached_file_path)>2000){ //if the data was present in cache, if the cache data is too small, the data might be corrupted and need to be update
+			if (file_exists($cached_file_path) and  filesize($cached_file_path)>100){ //if the data was present in cache, if the cache data is too small, the data might be corrupted and need to be update
 				$data[date('Y-m-d',$start_timestamp)]=$grab_weather->load_data($cached_file_path); //load from the cache
 			}else{  //if the data was not in cache
 				$newly_grab_data=$grab_weather -> fetch($station_id,date('Y-m-d',$start_timestamp),date('Y-m-d',$start_timestamp));  //get the data of that day
 				$data=$data+$newly_grab_data;  //merge to data pool
+				if (!file_exists($cache_weather_data.'/'.$station_id)){
+					mkdir($cache_weather_data.'/'.$station_id);
+				}
 				$grab_weather -> save_as_csv($cached_file_path,array_shift($newly_grab_data));  //save to cache
 			}
 			//echo date('Ymd',$start_timestamp).'<br>';
